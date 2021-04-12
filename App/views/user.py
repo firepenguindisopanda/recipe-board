@@ -3,6 +3,7 @@ from flask import Blueprint, redirect, render_template, request, jsonify, send_f
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 from App.models import User
+from App.controllers import ( get_users, get_users_json, create_user )
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
@@ -20,3 +21,10 @@ def client_app():
 @user_views.route('/static/users')
 def static_user_page():
   return send_from_directory('static', 'static-user.html')
+
+
+@user_views.route('/api/users', methods=['POST'])
+def create_user_action():
+    data = request.json
+    create_user(data['first_name'], data['last_name'])
+    return 'Created' 
