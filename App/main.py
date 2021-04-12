@@ -18,7 +18,7 @@ def loadConfig(app):
     #try to load config from file, if fails then try to load from environment
     try:
         app.config.from_object('App.config')
-        app.config['SQLALCHEMY_DATABASE_URI'] = get_db_uri() if app.config['SQLITEDB'] else app.config['DBURI']
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' if app.config['SQLITEDB'] else app.config['DBURI']
     except:
         print("config file not present using environment variables")
         # DBUSER = os.environ.get("DBUSER")
@@ -29,7 +29,7 @@ def loadConfig(app):
         DBURI = os.environ.get("DBURI")
         SQLITEDB = os.environ.get("SQLITEDB", default="true")
         app.config['ENV'] = os.environ.get("ENV")
-        app.config['SQLALCHEMY_DATABASE_URI'] = get_db_uri() if SQLITEDB in {'True', 'true', 'TRUE'} else DBURI
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db' if SQLITEDB in {'True', 'true', 'TRUE'} else DBURI
 
 def create_app():
     app = Flask(__name__, static_url_path='/static')
