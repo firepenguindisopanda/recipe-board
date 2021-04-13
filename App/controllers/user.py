@@ -9,11 +9,12 @@ def create_user(firstname, lastname, uwi_id, email, gender, dob):
     db.session.add(newuser)
     db.session.commit()
 '''
-def create_user(firstname, lastname):
+def create_user(first_name, last_name):
     # newuser = use()
-    newuser = User(first_name=firstname, last_name=lastname)
+    newuser = User(first_name=first_name, last_name=last_name)
     db.session.add(newuser)
     db.session.commit()
+    return True
 
 def get_users_json():
     users = User.query.all()
