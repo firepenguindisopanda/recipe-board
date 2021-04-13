@@ -1,6 +1,6 @@
 from flask import redirect, render_template, request, session, url_for
 
-from App.models import ( User )
+from App.models import ( User, db )
 
 '''
 def create_user(firstname, lastname, uwi_id, email, gender, dob):
