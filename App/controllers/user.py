@@ -11,7 +11,7 @@ def create_user(firstname, lastname, uwi_id, email, gender, dob):
 '''
 def create_user(firstname, lastname):
     # newuser = use()
-    newuser = User(firstname=firstname, lastname=lastname)
+    newuser = User(first_name=firstname, last_name=lastname)
     db.session.add(newuser)
     db.session.commit()
 
