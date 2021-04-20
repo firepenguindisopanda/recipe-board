@@ -10,6 +10,10 @@ from App.controllers import ( get_users, get_users_json, create_user )
 def login():
     render_template('login.html')
 
+@user_views.route("/signup")
+def signup():
+    render_template("signup.html")
+
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = User.query.all()
