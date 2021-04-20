@@ -6,6 +6,10 @@ from App.models import User
 from App.controllers import ( get_users, get_users_json, create_user )
 #from App.controllers import ( create_user )
 
+@user_views.route("/login")
+def login():
+    render_template('login.html')
+
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
     users = User.query.all()
