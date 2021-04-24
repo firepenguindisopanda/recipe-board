@@ -1,7 +1,7 @@
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/https://github.com/firepenguindisopanda/Recipe-Board)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/firepenguindisopanda/Recipe-Board)
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
-# Flask MVC Template
+# Recipe Board
 A template for flask applications sturcutured in the Model View Controller pattern [Demo](https://dcit-flaskmvc.herokuapp.com/)
 
 
