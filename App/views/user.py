@@ -4,6 +4,7 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 from App.models import User
 from App.controllers import ( get_users, get_users_json, create_user )
+from App.views import SignUp, LogIn
 #from App.controllers import ( create_user )
 
 @user_views.route("/login")
@@ -12,7 +13,8 @@ def login():
 
 @user_views.route("/signup")
 def signup():
-    render_template("signup.html")
+    form = SignUp() # create form object
+    return render_template('signup.html', form=form) # pass form object to template
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
