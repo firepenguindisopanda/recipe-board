@@ -4,6 +4,5 @@
     "python.linting.pylintArgs": [
         "--load-plugins",
         "pylint_flask_sqlalcheny"
-    ],
-    "python.pythonPath": "/home/gitpod/.pyenv/versions/3.8.9/bin/python"
+    ]
 }
