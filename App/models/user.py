@@ -8,6 +8,8 @@ db=SQLAlchemy()
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(80), unique=True, nullable=False)
+    last_name = db.Column(db.String(80), unique=False, nullable=False)
     username = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(120), nullable=False)
@@ -16,6 +18,8 @@ class User(db.Model, UserMixin):
     def toDict(self):
         return {
         "id": self.id,
+        "first_name": self.first_name,
+        "last_name": self.last_name,
         "username": self.username,
         "email": self.email,
         "password": self.password
