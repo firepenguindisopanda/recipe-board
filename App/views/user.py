@@ -15,7 +15,7 @@ def index():
 @user_views.route("/login")
 def login():
     form = LogIn()
-    render_template('login.html', form=form)
+    return render_template('login.html', form=form)
 
 @user_views.route("/signup")
 def signup():
