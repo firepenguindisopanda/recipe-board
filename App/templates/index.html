@@ -5,8 +5,8 @@
 {{ super() }}
 
 {% block content %}
-    <h1>Hello! This view is partially rendered on the server using jinja</h1>
-    <p>It must be dynamically served.</p>
-    <p>HELLO!</p>
+    {% if current_user.is_authenticated %}
+        <h3> Hi {{ current_user.username }}! </h3>
+    {% endif %}
     <a href="https://cs50.harvard.edu/college/2020/fall/weeks/9/" style="text-decoration:none;" target="_blank">Harvard CS50's Free Online Course</a>
 {% endblock %}
