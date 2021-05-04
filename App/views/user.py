@@ -12,10 +12,30 @@ def index():
     form = LogIn() # create form object
     return render_template('login.html', form=form) # pass form object to template
 
+@user_views.route('/recipes', methods=['GET'])
+@login_required
+def view_recipes():
+    return render_template('index.html')
+
 @user_views.route("/login")
 def login():
     form = LogIn()
     return render_template('login.html', form=form)
+
+@user_views.route("/login", methods=['POST'])
+def loginAction():
+    form = LogIn()
+    if form.validate_on_submit():
+        data = request.form
+        user = User.query.filter_by(username=data['username']).first()
+        if user and user.check_passsword(data['password']):
+            flash('Login Successful!')
+            login_user(user)
+            return redirect(url_for('index'))
+    flash('Invalid Credentials')
+    return redirect(url_for('login'))
+         
+
 
 @user_views.route("/signup")
 def signup():
