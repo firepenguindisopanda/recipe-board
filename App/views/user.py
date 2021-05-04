@@ -2,6 +2,8 @@ from flask import Blueprint, redirect, render_template, request, jsonify, send_f
 from flask_jwt import JWT, jwt_required, current_identity
 from flask_login import UserMixin
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user
+import json
+from sqlalchemy.exc import IntegrityError
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
@@ -42,10 +44,21 @@ def loginAction():
          
 
 
-@user_views.route("/signup")
+@user_views.route("/signup", methods=['GET', 'POST'])
 def signup():
-    form = SignUp() # create form object
-    return render_template('signup.html', form=form) # pass form object to template
+    if request.method == "GET":
+        form = SignUp() # create form object
+        return render_template('signup.html', form=form) # pass form object to template
+    elif request.method == "POST":
+        userdata = request.get_json()
+        try:
+            create_user(userdata['first_name'], userdata['last_name'], userdata['username'], userdata['email'], userdata['password'])
+        except IntegrityError:
+            db.session.rollback
+            return 'Username or email already exists'
+        return 'User created!'
+
+
 
 @user_views.route('/users', methods=['GET'])
 def get_user_page():
