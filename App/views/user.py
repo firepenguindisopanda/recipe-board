@@ -1,4 +1,7 @@
-from flask import Blueprint, redirect, render_template, request, jsonify, send_from_directory
+from flask import Blueprint, redirect, render_template, request, jsonify, send_from_directory, flash, url_for
+from flask_jwt import JWT, jwt_required, current_identity
+from flask_login import UserMixin
+from flask_login import LoginManager, current_user, login_user, login_required, logout_user
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
@@ -22,18 +25,20 @@ def login():
     form = LogIn()
     return render_template('login.html', form=form)
 
+'''
 @user_views.route("/login", methods=['POST'])
 def loginAction():
     form = LogIn()
     if form.validate_on_submit():
         data = request.form
         user = User.query.filter_by(username=data['username']).first()
-        if user and user.check_passsword(data['password']):
+        if user and user.check_password(data['password']):
             flash('Login Successful!')
             login_user(user)
             return redirect(url_for('index'))
     flash('Invalid Credentials')
     return redirect(url_for('login'))
+'''
          
 
 
