@@ -9,8 +9,8 @@ from .form import SignUp, LogIn
 
 @user_views.route('/', methods=['GET'])
 def index():
-    form = SignUp() # create form object
-    return render_template('signup.html', form=form) # pass form object to template
+    form = LogIn() # create form object
+    return render_template('login.html', form=form) # pass form object to template
 
 @user_views.route("/login")
 def login():
