@@ -4,6 +4,8 @@ from wtforms.validators import InputRequired, EqualTo, Email
 from wtforms.fields.html5 import EmailField
 
 class SignUp(FlaskForm):
+    first_name = StringField('First Name', validators=[InputRequired()])
+    last_name = StringField('Last Name', validators=[InputRequired()])
     username = StringField('username', validators=[InputRequired()])
     email = EmailField('email', validators=[Email(), InputRequired()])
     password = PasswordField('New Password', validators=[InputRequired(), EqualTo('confirm', message='Passwords must match')])
