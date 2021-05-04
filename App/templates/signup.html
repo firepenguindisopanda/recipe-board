@@ -9,6 +9,15 @@
       <div class="row">
         <form id="myForm" class="col s12 m8 offset-m2" method="POST" action="/signup">
             {{ form.csrf_token }}
+            <div class="input-field col s12 m8 offset-m2"> 
+              {{ form.first_name(size=20, class="validate") }}
+              {{ form.first_name.label }}
+            </div>
+
+            <div class="input-field col s12 m8 offset-m2"> 
+              {{ form.last_name(size=20, class="validate") }}
+              {{ form.last_name.label }}
+            </div>
 
             <div class="input-field col s12 m8 offset-m2"> 
               {{ form.username(size=20, class="validate") }}
