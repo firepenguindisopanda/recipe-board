@@ -9,9 +9,10 @@ def create_user(firstname, lastname, uwi_id, email, gender, dob):
     db.session.add(newuser)
     db.session.commit()
 '''
-def create_user(first_name, last_name):
+def create_user(first_name, last_name, username, email, password):
     # newuser = use()
-    newuser = User(first_name=first_name, last_name=last_name)
+    newuser = User(first_name=first_name, last_name=last_name, username=username, email=email)
+    newuser.set_password(password)
     db.session.add(newuser)
     db.session.commit()
     return True
