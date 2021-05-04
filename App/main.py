@@ -51,12 +51,16 @@ app.register_blueprint(api_views)
 app.register_blueprint(user_views)
 
 ''' Set up JWT here (if using flask JWT)'''
-# def authenticate(uname, password):
-#   pass
+def authenticate(uname, password):
+  #search for the specified user
+  user = User.query.filter_by(username=uname).first()
+  #if user is found and password matches
+  if user and user.check_password(password):
+    return user
 
-# #Payload is a dictionary which is passed to the function by Flask JWT
-# def identity(payload):
-#   pass
+#Payload is a dictionary which is passed to the function by Flask JWT
+def identity(payload):
+  return User.query.get(payload['identity'])
 
-# jwt = JWT(app, authenticate, identity)
+jwt = JWT(app, authenticate, identity)
 ''' End JWT Setup '''
