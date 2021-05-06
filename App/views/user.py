@@ -45,29 +45,11 @@ def login():
             user = User.query.filter_by(username=data['username']).first()
             if user and user.check_password(data['password']):
                 flash('Login Successful!')
-                login_user(user)
-                return redirect(url_for('index'))
+                
+                return redirect(url_for('user_views.view_recipes'))
         flash('Invalid credentials')
-        return redirect(url_for('login'))
-
-
-'''
-@user_views.route("/login", methods=['POST'])
-def loginAction():
-    form = LogIn()
-    if form.validate_on_submit():
-        data = request.form
-        user = User.query.filter_by(username=data['username']).first()
-        if user and user.check_password(data['password']):
-            flash('Login Successful!')
-            login_user(user)
-            return redirect(url_for('index'))
-    flash('Invalid Credentials')
-    return redirect(url_for('login'))
-'''
+        return redirect(url_for('user_views.index'))
          
-
-
 @user_views.route("/signup", methods=['GET', 'POST'])
 def signup():
     
@@ -85,7 +67,7 @@ def signup():
             except IntegrityError:
                 db.session.rollback
                 return 'Username or email already exists'
-            return redirect(url_for('users'))
+            return redirect(url_for('user_views.login'))
 
 
 
