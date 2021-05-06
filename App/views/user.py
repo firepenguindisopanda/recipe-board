@@ -22,10 +22,23 @@ def index():
 def view_recipes():
     return render_template('index.html')
 
-@user_views.route("/login")
+@user_views.route("/login", methods=['GET', 'POST'])
 def login():
-    form = LogIn()
-    return render_template('login.html', form=form)
+    if request.method == 'GET':
+        form = LogIn()
+        return render_template('login.html', form=form)
+    elif request.method == 'POST':
+        form = LogIn()
+        if form.validate_on_submit():
+            data = request.form
+            user = User.query.filter_by(username=data['username']).first()
+            if user and user.check_password(data['password']):
+                flash('Login Successful!')
+                login_user(user)
+                return redirect(url_for('index'))
+        flash('Invalid credentials')
+        return redirect(url_for('login'))
+        
 
 '''
 @user_views.route("/login", methods=['POST'])
@@ -46,17 +59,22 @@ def loginAction():
 
 @user_views.route("/signup", methods=['GET', 'POST'])
 def signup():
+    
     if request.method == "GET":
         form = SignUp() # create form object
         return render_template('signup.html', form=form) # pass form object to template
     elif request.method == "POST":
-        userdata = request.get_json()
-        try:
-            create_user(userdata['first_name'], userdata['last_name'], userdata['username'], userdata['email'], userdata['password'])
-        except IntegrityError:
-            db.session.rollback
-            return 'Username or email already exists'
-        return 'User created!'
+        form = SignUp()
+        if form.validate_on_submit():
+            userdata = request.form
+            #print(userdata['first_name'])
+            try:
+                create_user(userdata['first_name'], userdata['last_name'], userdata['username'], userdata['email'], userdata['password'])
+                
+            except IntegrityError:
+                db.session.rollback
+                return 'Username or email already exists'
+            return redirect(url_for('index'))
 
 
 
