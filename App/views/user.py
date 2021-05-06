@@ -1,16 +1,27 @@
 from flask import Blueprint, redirect, render_template, request, jsonify, send_from_directory, flash, url_for
 from flask_jwt import JWT, jwt_required, current_identity
-from flask_login import UserMixin
-from flask_login import LoginManager, current_user, login_user, login_required, logout_user
+from flask_login import LoginManager, current_user, login_user, login_required, logout_user, UserMixin
 import json
 from sqlalchemy.exc import IntegrityError
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
-from App.models import User
+from App.models import User, db
 from App.controllers import ( get_users, get_users_json, create_user )
 from .form import SignUp, LogIn 
 #from App.controllers import ( create_user )
+
+''' Begin boilerplate code '''
+''' Begin Flask Login Functions '''
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+''' End Flask Login Functions '''
 
 @user_views.route('/', methods=['GET'])
 def index():
@@ -38,7 +49,7 @@ def login():
                 return redirect(url_for('index'))
         flash('Invalid credentials')
         return redirect(url_for('login'))
-        
+
 
 '''
 @user_views.route("/login", methods=['POST'])
@@ -74,7 +85,7 @@ def signup():
             except IntegrityError:
                 db.session.rollback
                 return 'Username or email already exists'
-            return redirect(url_for('index'))
+            return redirect(url_for('users'))
 
 
 
