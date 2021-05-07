@@ -25,9 +25,12 @@ def serve():
 
 @manager.command
 def make_users():
-    bob = User(first_name="Bob", last_name="Smith", username="bob", email="bob@example.com", password="bobpass")
-    sally = User(first_name="Sally", last_name="Smith", username="sal", email="sal@example.com", password="salpass")
-    rob = User(first_name="Rob", last_name="Smith", username="rob", email="rob@example.com", password="robpass")
+    bob = User(first_name="Bob", last_name="Smith", username="bob", email="bob@example.com")
+    bob.set_password("bobpass")
+    sally = User(first_name="Sally", last_name="Smith", username="sal", email="sal@example.com")
+    sally.set_password("salpass")
+    rob = User(first_name="Rob", last_name="Smith", username="rob", email="rob@example.com")
+    rob.set_password("robpass")
     db.session.add(bob)
     db.session.add(sally)
     db.session.add(rob)
