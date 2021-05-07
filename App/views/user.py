@@ -11,17 +11,6 @@ from App.models import User, db
 from App.controllers import ( get_users, get_users_json, create_user )
 from .form import SignUp, LogIn 
 
-''' Begin boilerplate code '''
-''' Begin Flask Login Functions '''
-login_manager = LoginManager()
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(user_id)
-
-
-''' End Flask Login Functions '''
 
 @user_views.route('/', methods=['GET'])
 def index():
