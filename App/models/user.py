@@ -3,7 +3,6 @@ from flask import Flask, request, render_template, redirect, flash, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import json
-from flask_login import UserMixin
 db=SQLAlchemy()
 
 class User(db.Model, UserMixin):
