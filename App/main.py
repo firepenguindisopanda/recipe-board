@@ -3,13 +3,26 @@ from flask import Flask
 from flask_jwt import JWT
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
+from flask_login import LoginManager, current_user, login_user, login_required, logout_user, UserMixin
 
-from App.models import db
+from App.models import db, User
 
 from App.views import (
     api_views,
     user_views
 )
+
+''' Begin boilerplate code '''
+''' Begin Flask Login Functions '''
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+
+''' End Flask Login Functions '''
 
 def get_db_uri(scheme='sqlite://', user='', password='', host='//demo.db', port='', name=''):
     return scheme+'://'+user+':'+password+'@'+host+':'+port+'/'+name 
@@ -40,6 +53,7 @@ def create_app():
     app.config['UPLOADED_PHOTOS_DEST'] = "App/uploads"
     photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
     configure_uploads(app, photos)
+    login_manager.init_app(app)
     db.init_app(app)
     return app
 
