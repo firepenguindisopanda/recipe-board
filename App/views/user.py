@@ -1,5 +1,4 @@
 from flask import Blueprint, redirect, render_template, request, jsonify, send_from_directory, flash, url_for
-from flask_jwt import JWT, jwt_required, current_identity
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user, UserMixin
 import json
 from sqlalchemy.exc import IntegrityError
