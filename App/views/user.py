@@ -6,10 +6,10 @@ from sqlalchemy.exc import IntegrityError
 
 user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
+
 from App.models import User, db
 from App.controllers import ( get_users, get_users_json, create_user )
 from .form import SignUp, LogIn 
-#from App.controllers import ( create_user )
 
 ''' Begin boilerplate code '''
 ''' Begin Flask Login Functions '''
@@ -25,16 +25,17 @@ def load_user(user_id):
 
 @user_views.route('/', methods=['GET'])
 def index():
-    form = LogIn() # create form object
-    return render_template('login.html', form=form) # pass form object to template
+    form = LogIn()
+    return render_template('login.html', form=form)
 
 @user_views.route('/recipes', methods=['GET'])
 @login_required
 def view_recipes():
     return render_template('index.html')
 
+
 @user_views.route("/login", methods=['GET', 'POST'])
-def login():
+def loginAction():
     if request.method == 'GET':
         form = LogIn()
         return render_template('login.html', form=form)
@@ -42,13 +43,14 @@ def login():
         form = LogIn()
         if form.validate_on_submit():
             data = request.form
-            user = User.query.filter_by(username=data['username']).first()
+            user = User.query.filter_by(username = data['username']).first()
             if user and user.check_password(data['password']):
                 flash('Login Successful!')
-                
+                login_user(user)
                 return redirect(url_for('user_views.view_recipes'))
         flash('Invalid credentials')
         return redirect(url_for('user_views.index'))
+
          
 @user_views.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -67,7 +69,7 @@ def signup():
             except IntegrityError:
                 db.session.rollback
                 return 'Username or email already exists'
-            return redirect(url_for('user_views.login'))
+            return redirect(url_for('user_views.index'))
 
 
 
