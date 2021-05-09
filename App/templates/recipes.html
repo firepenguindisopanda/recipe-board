@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Grocery Board{% endblock %}
+{% block page %} {{ current_user.username }}'s' Grocery Board{% endblock %}
+
+{{ super() }}
+
+{% block content %}
+    {% if current_user.is_authenticated %}
+        <h3> Hi {{ current_user.username }}! </h3>
+    {% endif %}
+    {% for recipe in recipe_data %}
+        <ul>
+            <li>
+                {{ recipe.name }}
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}
