@@ -19,3 +19,6 @@ def get_users_json():
     return json
 def get_users():
     return User.query.all()
+
+def get_recipes():
+    return Recipe.query.all()
