@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 from flask_login import LoginManager, current_user, login_user, login_required, logout_user, UserMixin
 
-from App.models import ( User, db )
+from App.models import ( User, db, Ingredient, Recipe, UserRecipe )
 
 def create_user(first_name, last_name, username, email, password):
     # newuser = use()
