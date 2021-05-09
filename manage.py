@@ -1,7 +1,8 @@
+import json
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from App.main import app
-from App.models import db
+from App.models import db, User, Recipe
 
 manager = Manager(app)
 migrate = Migrate(app, db)
@@ -16,6 +17,20 @@ manager.add_command('db', MigrateCommand)
 def initDB():
     db.create_all(app=app)
     print('database initialized!')
+
+#load data into the database
+@manager.command
+def loadData():
+    f = open('App/raw_data.json')
+    data = json.load(f)
+    for x in data.values():
+        ingredient_list = ""
+        for y in x['ingredients']:
+            ingredient_list += y + ","
+        new_recipe = Recipe(name=x['title'], ingredients_list=ingredient_list, instructions=x['instructions'])
+        db.session.add(new_recipe)
+    db.session.commit()
+    print('data was loaded successfully?!')
 
 # serve command
 @manager.command
