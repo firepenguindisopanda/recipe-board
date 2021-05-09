@@ -7,7 +7,7 @@ user_views = Blueprint('user_views', __name__, template_folder='../templates')
 
 
 from App.models import User, db
-from App.controllers import ( get_users, get_users_json, create_user )
+from App.controllers import ( get_users, get_users_json, create_user, get_recipes )
 from .form import SignUp, LogIn 
 
 
@@ -19,7 +19,8 @@ def index():
 @user_views.route('/recipes', methods=['GET'])
 @login_required
 def view_recipes():
-    return render_template('index.html')
+    recipe_data = get_recipes()
+    return render_template('recipes.html', recipe_data=recipe_data)
 
 
 @user_views.route("/login", methods=['GET', 'POST'])
