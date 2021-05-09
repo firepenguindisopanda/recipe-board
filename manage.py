@@ -7,7 +7,7 @@ from App.models import db, User, Recipe
 manager = Manager(app)
 migrate = Migrate(app, db)
 
-from App.models import User
+from App.models import User, Recipe
 
 # add migrate command
 manager.add_command('db', MigrateCommand)
