@@ -23,7 +23,12 @@
                 <!--<li><a href="/static/users">Users JS</a></li>-->
                 <li><a href="#">Recipes</a></li>
                 <li><a href="#">Bookmarked Recipes</a></li>
+                {% if current_user.is_authenticated %}
+                <li><a href="/logout">Logout</a></li>
+                {% else %}
+                <li><a href="/login">Login</a></li>
                 <li><a href="/signup">Sign Up</a></li>
+                {% endif %}
             </ul>
         </div>
       </div>
