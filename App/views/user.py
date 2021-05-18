@@ -40,6 +40,13 @@ def loginAction():
         flash('Invalid credentials')
         return redirect(url_for('user_views.index'))
 
+@user_views.route("/logout", methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    flash('Logged Out')
+    return redirect(url_for('user_views.index'))
+    
          
 @user_views.route("/signup", methods=['GET', 'POST'])
 def signup():
