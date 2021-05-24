@@ -8,12 +8,12 @@
     {% if current_user.is_authenticated %}
         <h3> Hi {{ current_user.username }}! </h3>
     {% endif %}
-    <div class="row" style="background-color: black;">
+    <div class="row" style="background-color: black; padding: 0;">
         
             
     {% for recipe in recipe_data %}
-        <div class="col m4">
-            <div class="card blue-grey darken-1 sticky-action">
+        <div class="col m6" style="border: 1px solid orange; ">
+            <div class="card blue-grey darken-1 sticky-action" style="border: 1px solid red ">
                 <div class="card-content white-text">
                     <span class="card-title activator">{{ recipe.name }}<i class="material-icons right">more_vert</i></span>
                     
@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-                    <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                    <p>{{ recipe.ingredients_list }}</p>
                 </div>
             </div>
             <div class="divider"></div>
