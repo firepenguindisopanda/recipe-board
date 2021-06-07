@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block title %}Grocery Board{% endblock %}
-{% block page %} {{ current_user.username}}'s' Grocery Board{% endblock %}
+{% block page %}Grocery Board{% endblock %}
 
 {{ super() }}
 
@@ -8,5 +8,31 @@
     {% if current_user.is_authenticated %}
         <h3> Hi {{ current_user.username }}! </h3>
     {% endif %}
-    <a href="https://cs50.harvard.edu/college/2020/fall/weeks/9/" style="text-decoration:none;" target="_blank">Harvard CS50's Free Online Course</a>
+    
+    <div class="row" style="color: black;">
+        <div class="col s6" style="background-color: black;">
+            <a href="https://cs50.harvard.edu/college/2020/fall/weeks/9/" style="text-decoration:none;" target="_blank">Harvard CS50's Free Online Course</a>
+            
+        </div>
+        <div class="col s6" style="background-color: whitesmoke;">
+            <a href="#">Another Harvard Course Link</a>
+        </div>
+        
+        <div class="divider"></div>
+        <div class="section">
+            <h5>Section 1</h5>
+            <p>Stuff</p>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+            <h5>Section 2</h5>
+            <p>Stuff</p>
+        </div>
+        <div class="divider"></div>
+        <div class="section">
+            <h5>Section 3</h5>
+            <p>Stuff</p>
+        </div>
+
+    </div>
 {% endblock %}
