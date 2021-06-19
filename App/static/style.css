@@ -1,6 +1,8 @@
 body{
     background-color: whitesmoke;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/000/473/108/original/vector-recipe-book-on-wooden-background.jpg");
 }
 #content{
     background-color: orangered;
+    height: 100vh;
 }
