@@ -13,8 +13,8 @@ from .form import SignUp, LogIn
 
 @user_views.route('/', methods=['GET'])
 def index():
-    
-    return render_template('index.html')
+    recipe_data = get_recipes()
+    return render_template('index.html', recipe_data=recipe_data)
 
 @user_views.route('/recipes', methods=['GET'])
 @login_required
