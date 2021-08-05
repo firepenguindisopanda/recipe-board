@@ -90,5 +90,5 @@ def static_user_page():
 @user_views.route('/api/users', methods=['POST'])
 def create_user_action():
     data = request.json
-    create_user(data['first_name'], data['last_name'])
+    create_user(data['first_name'], data['last_name'], username="", email="", password="")
     return 'Created' 
